@@ -1,0 +1,38 @@
+{
+  "id": 1,
+  "groupName": "Osiedle lipowe",
+  "homeTown": "Warszawa",
+  "formed": 2023,
+  "members": [
+    {
+      "id": 1,
+      "name": "Marianna",
+      "lastName": "Kula",
+      "age": 54,
+      "email": "mkula@mail.com",
+      "mainSkills": ["nauka języka angielskiego", "nauka języka niemieckiego"],
+      "password": "kula",
+      "carOwner": true
+    },
+    {
+      "id": 2,
+      "name": "Adam",
+      "lastName": "Paw",
+      "age": 28,
+      "email": "apaw@mail.com",
+      "mainSkills": ["cukiernictwo", "elektryka"],
+      "password": "paw",
+      "carOwner": false
+    },
+    {
+      "id": 3,
+      "name": "Katarzyna",
+      "lastName": "Okienko",
+      "age": 13,
+      "email": "kokienko@mail.com",
+      "mainSkills": ["szydełkowanie", "robienie na drutach"],
+      "password": "okienko",
+      "carOwner": false
+    }
+  ]
+}
