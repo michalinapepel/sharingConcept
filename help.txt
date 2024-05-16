@@ -1,0 +1,57 @@
+-> Aby uruchomić bazę danych u siebie (na porcie 3000), wystarczy w konsoli wpisać npx json-server db.json. Baza jest w projekcie. Doinstalować potrzebne paczki i powinno super działać!
+
+-> Aby usuwac, dodawac, wyswietlac lub updateowac userów z bazy danych jest stworzony hook (hooks/useUsers.ts)
+Przykładowe użycie w kodzie aplikacji (usuwanie, dodawanie na sztywno usera Misia, aktualizowanie też na sztywno):
+
+const { users, error, isLoading, setUsers, setError } = useUsers();
+
+  const deleteUser = (user: User) => {
+    const originalUsers = [...users];
+    setUsers(users.filter((u) => u.id !== user.id));
+    userService.delete(user.id).catch((err) => {
+      setError(err.message);
+      setUsers(originalUsers);
+    });
+  };
+
+  const addUser = () => {
+    const originalUsers = [...users];
+    const newUser: User = {
+      id: 0,
+      name: "Misia",
+      lastName: "Pepel",
+      email: "misia@mail.com",
+      password: "misia",
+    };
+    setUsers([newUser, ...users]);
+    userService
+      .add(newUser)
+      .then(({ data: savedUser }) => setUsers([savedUser, ...users]))
+      .catch((err) => {
+        setError(err.message);
+        setUsers(originalUsers);
+      });
+  };
+
+  const updateUser = (user: User) => {
+    const originalUsers = [...users];
+    const updatedUser = { ...user, name: user.name + "!" };
+    setUsers(users.map((u) => (u.id === user.id ? updatedUser : u)));
+    userService.update(updatedUser).catch((err) => {
+      setError(err.message);
+      setUsers(originalUsers);
+    });
+    };
+
+
+...a potem można na przykład zrobić przycisk który onPress={() => deleteUser(user)} lub onPress={addUser}, albo wyświetlić użytkowników jako elementy html:
+{users.map((user) => {
+          return (
+            <View key={user.id}>
+              <Text>
+                {user.name}
+                {"  "}
+              </Text>
+            </View>
+          );
+        })}
